@@ -10,6 +10,8 @@ import (
 // @todo maybe replace notify with fsnotify
 // See: https://github.com/fsnotify/fsnotify
 
+// Further reading: https://stackoverflow.com/a/956513/5530920
+
 type renameEvent struct {
 	before struct {
 		name      string
