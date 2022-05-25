@@ -7,7 +7,7 @@ import (
 	"github.com/rjeczalik/notify"
 )
 
-// @todo replace notify with fsnotify
+// @todo maybe replace notify with fsnotify
 // See: https://github.com/fsnotify/fsnotify
 
 type renameEvent struct {
