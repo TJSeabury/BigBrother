@@ -7,6 +7,9 @@ import (
 	"github.com/rjeczalik/notify"
 )
 
+// @todo replace notify with fsnotify
+// See: https://github.com/fsnotify/fsnotify
+
 type renameEvent struct {
 	before struct {
 		name      string
@@ -75,6 +78,7 @@ func main() {
 }
 
 func extractFilename(path string) (ok bool, filename string) {
+	// See: https://regex101.com/r/2IMLs8/1
 	filenameRegExp := regexp.MustCompile(`(.+?)(?:\\|/)([\w-\. ]+)$`)
 	match := filenameRegExp.FindStringSubmatch(path)
 	if match == nil {
@@ -84,6 +88,7 @@ func extractFilename(path string) (ok bool, filename string) {
 }
 
 func isNameCompliant(filename string) (ok bool, details map[string]string) {
+	// See: https://regex101.com/r/LXFu6r/1
 	validNameExp := regexp.MustCompile(`.*?(?P<jobNumber>\d+)_(?P<client>[a-zA-Z]+)_(?P<name>[a-zA-Z]+)(?P<accronym>-[A-Z]{2,4})?(?P<dimensions>-\d{1,4}.?\d{1,4}x\d{1,4}.?\d{1,4})?(?P<variant>-[A-Z])?(?P<version>-(?:[vV]\d{1,2}|\d{6}))?\.[a-z]+`)
 
 	match := validNameExp.FindStringSubmatch(filename)
